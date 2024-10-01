@@ -61,11 +61,7 @@ class _QuestionScreeenState extends State<QuestionScreeen> {
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: selectedAnswerindex == index
-                          ? Colors.red
-                          : Colors.blue,
-                    ),
+                    border: Border.all(color: getColor(index), width: 2),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,6 +88,7 @@ class _QuestionScreeenState extends State<QuestionScreeen> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
+                    selectedAnswerindex = null;
                     if (questionindex < DummyDb.questionList.length - 1) {
                       questionindex++;
                       setState(() {});
@@ -107,5 +104,22 @@ class _QuestionScreeenState extends State<QuestionScreeen> {
         ],
       ),
     );
+  }
+
+  Color getColor(int currentIndex) {
+    if (selectedAnswerindex != null &&
+        currentIndex == DummyDb.questionList[questionindex]["answerIndex"]) {
+      return Colors.green;
+    }
+
+    if (selectedAnswerindex == currentIndex) if (selectedAnswerindex ==
+        DummyDb.questionList[questionindex]["answerIndex"]) {
+      return Colors.green;
+    } else {
+      return Colors.red;
+    }
+    else {
+      return Colors.blue;
+    }
   }
 }
